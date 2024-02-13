@@ -1,3 +1,23 @@
+/* .container-large {
+  width: 1080px;
+  align-items: center;
+} */
+
+.pagination-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.pagination-center button {
+  margin: 0 10px; /* Optional margin between buttons */
+}
+
+.title-center {
+  text-align: center;
+}
+
 /* Default styling for the list items */
 ul {
   list-style: none;
@@ -9,8 +29,7 @@ ul {
 }
 
 li {
-  width: calc(25% - 10px);
-  /* Set width for four items per row with spacing */
+  width: calc(25% - 10px); /* Set width for four items per row with spacing */
   margin: 10px;
   box-sizing: border-box;
 }
@@ -18,21 +37,24 @@ li {
 /* Media queries for responsiveness */
 @media screen and (max-width: 1200px) {
   li {
-    width: calc(33.33% - 10px);
-    /* Three items per row */
+    width: calc(25% - 10px); /* Maintain four items per row */
   }
 }
 
 @media screen and (max-width: 800px) {
   li {
-    width: calc(50% - 10px);
-    /* Two items per row */
+    width: calc(33.33% - 10px); /* Display three items per row */
   }
 }
 
 @media screen and (max-width: 600px) {
   li {
-    width: calc(100% - 10px);
-    /* One item per row */
+    width: calc(50% - 10px); /* Show two items per row */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  li {
+    width: calc(100% - 10px); /* One item per row */
   }
 }

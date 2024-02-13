@@ -1,39 +1,67 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
   const [characters, setCharacters] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        for (let page = 1; page <= 42; page++) {
-          const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`);
-          const data = await response.json();
-          console.log(data)
-          setCharacters(prevCharacters => [...prevCharacters, ...data.results]);
-        }
+        const response = await fetch(
+          `https://rickandmortyapi.com/api/character?page=${page}`
+        );
+        const data = await response.json();
+        setCharacters(data.results);
+        setLoading(false);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures useEffect runs only once
+  }, [page]); // Re-fetch data when the page state changes
+
+  const handleNextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setPage((prevPage) => (prevPage > 1 ? prevPage - 1 : 1));
+  };
 
   return (
-    <div>
-      <h1>Rick and Morty Characters</h1>
-      <ul className='character-list'>
-    {characters.map(character => (
-      <li className='character-item' key={character.id}>
-        <img src={character.image} />
-        <p>{character.name}</p>
-      </li>
-    ))}
-  </ul>
+    <div className="container-large">
+      <h1 className="title-center">Rick and Morty Characters</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <div className="pagination-center">
+            <button onClick={handlePrevPage} disabled={page === 1}>
+              Previous Page
+            </button>
+            <button onClick={handleNextPage}>Next Page</button>
+          </div>
+          <ul className="character-list">
+            {characters.map((character) => (
+              <li className="character-item" key={character.id}>
+                <img src={character.image} alt={character.name} />
+                <p>{character.name}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="pagination-center">
+            <button onClick={handlePrevPage} disabled={page === 1}>
+              Previous Page
+            </button>
+            <button onClick={handleNextPage}>Next Page</button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
 
-export default App
+export default App;
