@@ -4,4 +4,4 @@
 
 # Location https://rickandmortyapi.com/api/location
 
-# Episodes https://rickandmortyapi.com/api/episodes
+# Episodes https://rickandmortyapi.com/api/episode
