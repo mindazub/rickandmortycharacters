@@ -1,0 +1,38 @@
+/* Default styling for the list items */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+li {
+  width: calc(25% - 10px);
+  /* Set width for four items per row with spacing */
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 1200px) {
+  li {
+    width: calc(33.33% - 10px);
+    /* Three items per row */
+  }
+}
+
+@media screen and (max-width: 800px) {
+  li {
+    width: calc(50% - 10px);
+    /* Two items per row */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  li {
+    width: calc(100% - 10px);
+    /* One item per row */
+  }
+}
